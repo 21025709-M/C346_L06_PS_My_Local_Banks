@@ -22,6 +22,9 @@ public class MainActivity extends AppCompatActivity {
     String url = "";
     String phoneNo = "";
 
+    boolean favDbs = false, favOcbc = false, favUob = false;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
         }
         menu.add(0, 0, 0, "Website");
         menu.add(0, 1, 1, "Contact the bank");
+        menu.add(0, 2, 2, "Make Favourite");
     }
 
     @Override
@@ -82,11 +86,38 @@ public class MainActivity extends AppCompatActivity {
         } else if (item.getItemId() == 1) {
             Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + phoneNo));
             startActivity(intent);
+        } else if (item.getItemId() == 2) {
+            if (tvSelected == tvDBS) {
+                favDbs = !favDbs;
+                if(favDbs){
+                    tvSelected.setTextColor(Color.RED);
+                }
+                else {
+                    tvSelected.setTextColor(Color.BLACK);
+                }
+            }
+            else if (tvSelected == tvOCBC) {
+                favOcbc = !favOcbc;
+                if(favOcbc){
+                    tvSelected.setTextColor(Color.RED);
+                }
+                else {
+                    tvSelected.setTextColor(Color.BLACK);
+                }
+            }
+            else if (tvSelected == tvUOB) {
+                favUob = !favUob;
+                if(favUob){
+                    tvSelected.setTextColor(Color.RED);
+                }
+                else {
+                    tvSelected.setTextColor(Color.BLACK);
+                }
+            }
         }
 
         return super.onContextItemSelected(item);
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -105,6 +136,9 @@ public class MainActivity extends AppCompatActivity {
             return true;
 
         } else if (item.getItemId() == R.id.ChineseSelection) {
+//            tvDBS.setText("星展银行");
+//            tvOCBC.setText("华侨银行");
+//            tvUOB.setText("大华银行");
             tvDBS.setText(getString(R.string.dbs_c));
             tvOCBC.setText(getString(R.string.ocbc_c));
             tvUOB.setText(getString(R.string.uob_c));
